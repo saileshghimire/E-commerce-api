@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+import os
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,8 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'product',
     'rest_framework',
+    'user_app',
+    'product',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'user_app.email_backend.EmailBackend',  # Use your custom email authentication backend
+    'django.contrib.auth.backends.ModelBackend',  # Default authentication backend
 ]
 
 MIDDLEWARE = [
@@ -123,3 +133,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'user_app.CustomUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=config('SIMPLE_JWT_ACCESS_TOKEN_LIFETIME', default=5, cast=int)),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=config('SIMPLE_JWT_REFRESH_TOKEN_LIFETIME', default=1, cast=int)),
+    'ALGORITHM': config('SIMPLE_JWT_ALGORITHM', default='HS256'),
+    'SIGNING_KEY': config('SIMPLE_JWT_SIGNING_KEY'),
+    'USER_ID_FIELD': config('SIMPLE_JWT_USER_ID_FIELD', default='id'),
+}
