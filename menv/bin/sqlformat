@@ -1,4 +1,6 @@
-#!/home/sailesh/Documents/E-Commerce/menv/bin/python3
+#!/bin/sh
+'''exec' "/home/sailesh/vs code/Rest Framework/E-Commerce/menv/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys
