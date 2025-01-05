@@ -1,5 +1,18 @@
-from product.models import Product, Comment, Review
+from product.models import Category, SubCategory ,Product, Comment, Review
 from rest_framework import serializers
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+class SubCategorySerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+    class Meta:
+        model = SubCategory
+        fields = ['id','name','category', 'description']
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
