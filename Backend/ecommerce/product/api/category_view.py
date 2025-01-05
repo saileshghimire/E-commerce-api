@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from ..models import Category
 from .serializers import CategorySerializer
-from rest_framework.authentication import JWTAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 

@@ -15,7 +15,7 @@ class Category(models.Model):
     
 class SubCategory(models.Model):
     name = models.CharField(max_length=100, unique=True, db_index=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="subcategory")
     description = models.TextField()
 
     def __str__(self):
@@ -23,14 +23,14 @@ class SubCategory(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name="category", db_index=True)
-    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, related_name="subcategory", db_index=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name="products", db_index=True)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, related_name="products", db_index=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, db_index=True)
     discount_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     description = models.TextField()
-    stock_quantity = models.PositiveIntegerField()
+    stock_quantity = models.PositiveIntegerField(default=0)
     # Stock Keeping Unit
-    sku = models.CharField(max_length=100, blank=True, null=True, unique=True, db_index=True)
+    sku = models.CharField(max_length=100, unique=True, db_index=True)
     image = models.ImageField(upload_to='products_images/', blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     uploaded_at = models.DateTimeField(auto_now=True)
@@ -51,10 +51,10 @@ class Product(models.Model):
 
 class Review(models.Model):
     rating = models.PositiveIntegerField(validators=[MinValueValidator(1),MaxValueValidator(5)], db_index=True)
-    review_product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="review_product", db_index=True)
+    review_product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="reviews", db_index=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviewer_user', db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updateda_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"Review for {self.review_product.name} by {self.user.email}"
@@ -62,18 +62,18 @@ class Review(models.Model):
 
 class Comment(models.Model):
     comment = models.TextField()
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_comment", db_index=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="comments", db_index=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="commenter_user", db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.product_comment.name
+        return self.product.name
     
 
 class Cart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="carts")
-    creted_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
