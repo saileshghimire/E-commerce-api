@@ -32,7 +32,7 @@ class Loginview(generics.GenericAPIView):
                 email = serializer.validated_data['email'],
                 password = serializer.validated_data['password']
             )
-            print(f"user details:{user}")
+            # print(f"user details:{user}")
             if user is not None:
                 refresh_token = RefreshToken.for_user(user=user)
                 access_token = refresh_token.access_token
@@ -40,7 +40,7 @@ class Loginview(generics.GenericAPIView):
                     "access_token": str(access_token),
                     "refresh_token": str(refresh_token)
                 }
-                print(response)
+                # print(response)
                 return Response(response, status=status.HTTP_200_OK)
             return Response({"message":"Invalid Credentials"}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

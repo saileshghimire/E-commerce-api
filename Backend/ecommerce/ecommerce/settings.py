@@ -144,7 +144,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=config('SIMPLE_JWT_ACCESS_TOKEN_LIFETIME', default=5, cast=int)),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=config('SIMPLE_JWT_ACCESS_TOKEN_LIFETIME', default=5, cast=int)),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=config('SIMPLE_JWT_REFRESH_TOKEN_LIFETIME', default=1, cast=int)),
     'ALGORITHM': config('SIMPLE_JWT_ALGORITHM', default='HS256'),
     'SIGNING_KEY': config('SIMPLE_JWT_SIGNING_KEY'),

@@ -6,7 +6,7 @@ from product.api.views import Reviewlist, ReviewEdit
 
 urlpatterns = [
     path("category/", CategoryAPIView.as_view(), name="category-list"),
-    path("category/<int:pk>", CategoryDetailAPIView.as_view(), name="category-detail"),
+    path("category/<int:id>", CategoryDetailAPIView.as_view(), name="category-detail"),
 
     path('productlist/', Productlist.as_view(), name="productlist"),
     path('productedit/<int:pk>/',ProductEdit.as_view(), name="productedit"),

@@ -21,4 +21,5 @@ class CategoryDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsADirectoryError]
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
