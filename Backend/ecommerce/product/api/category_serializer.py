@@ -1,10 +1,6 @@
 from rest_framework import serializers
 from product.models import Category
 
-# class SubCategoryForCategoryListSerializer(serializers.ModelSerializer):
-#     class Meta:
-        
-
 class CategoryListSerializer(serializers.ModelSerializer):
     parent_category = serializers.SerializerMethodField()
 

@@ -26,6 +26,7 @@ class Product(models.Model):
     # Stock Keeping Unit
     sku = models.CharField(max_length=100, unique=True, db_index=True)
     image = models.ImageField(upload_to='products_images/', blank=True,null=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_product')
     created_at = models.DateTimeField(auto_now_add=True)
     uploaded_at = models.DateTimeField(auto_now=True)
 
