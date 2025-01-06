@@ -2,10 +2,10 @@ from product.models import Category, Product, Comment, Review
 from rest_framework import serializers
 
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = '__all__'
+# class CategorySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Category
+#         fields = '__all__'
 
 
 class ProductSerializer(serializers.ModelSerializer):

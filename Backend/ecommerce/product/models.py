@@ -9,7 +9,7 @@ from django.conf import settings
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, db_index=True)
     description = models.TextField()
-    subcategory = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    parent_category = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
