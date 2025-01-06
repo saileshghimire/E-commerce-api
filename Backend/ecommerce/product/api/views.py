@@ -51,41 +51,41 @@ class CommentEdit(APIView):
     
 
 
-class Reviewlist(APIView):
+# class Reviewlist(APIView):
 
-    def get(self,request):
-        items = Review.objects.all()
-        serializer = ReviewSerializer(items,many=True)
-        return Response(serializer.data)
+#     def get(self,request):
+#         items = Review.objects.all()
+#         serializer = ReviewSerializer(items,many=True)
+#         return Response(serializer.data)
     
-    def post(self,request):
-        serializer = ReviewSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(serializer.errors)
+#     def post(self,request):
+#         serializer = ReviewSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         else:
+#             return Response(serializer.errors)
         
-class ReviewEdit(APIView):
+# class ReviewEdit(APIView):
     
-    def get(self,request,pk):
-        try:
-            items = Review.objects.get(pk=pk)
-        except Product.DoesNotExist:
-            return Response({'error':'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
-        seriallizer = ReviewSerializer(items)
-        return Response(seriallizer.data)
+#     def get(self,request,pk):
+#         try:
+#             items = Review.objects.get(pk=pk)
+#         except Product.DoesNotExist:
+#             return Response({'error':'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
+#         seriallizer = ReviewSerializer(items)
+#         return Response(seriallizer.data)
     
-    def put(self,request,pk):
-        items = Review.objects.get(pk=pk)
-        serializer = ReviewSerializer(items,data=request.data) 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+#     def put(self,request,pk):
+#         items = Review.objects.get(pk=pk)
+#         serializer = ReviewSerializer(items,data=request.data) 
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         else:
+#             return Response(status=status.HTTP_400_BAD_REQUEST)
         
-    def delete(self,request,pk):
-        items = Review.objects.get(pk=pk)
-        items.delete()
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+#     def delete(self,request,pk):
+#         items = Review.objects.get(pk=pk)
+#         items.delete()
+#         return Response(status=status.HTTP_400_BAD_REQUEST)

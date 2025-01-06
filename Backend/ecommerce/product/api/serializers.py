@@ -20,10 +20,10 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = '__all__'
 
-class ReviewSerializer(serializers.ModelSerializer):
+# class ReviewSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Review
-        fields = '__all__'
+#     class Meta:
+#         model = Review
+#         fields = '__all__'
 
         
