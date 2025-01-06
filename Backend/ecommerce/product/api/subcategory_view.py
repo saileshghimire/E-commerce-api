@@ -7,7 +7,6 @@ from ..models import SubCategory
 
 class SubCategoryListCreateView(generics.ListCreateAPIView):
     queryset = SubCategory.objects.all()
-    # serializer_class = SubCategorySerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     
@@ -20,4 +19,15 @@ class SubCategoryListCreateView(generics.ListCreateAPIView):
         serializer.save()
         # return Response({"message":"SubCategory added"},status=status.HTTP_201_CREATED)
 
+    
+class subcategoryDetailview(generics.RetrieveUpdateAPIView):
+    queryset = SubCategory.objects.all()
+    authentication_classes = [JWTAuthentication]
+    permission_classes = {IsAuthenticated}
+    lookup_field = 'id'
+
+    def get_serializer(self, *args, **kwargs):
+        if self.request.method == 'Get':
+            return SubCategoryViewSerializer(*args, **kwargs)
+        return SubCategoryViewSerializer(*args, **kwargs)
     
