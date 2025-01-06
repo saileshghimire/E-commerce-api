@@ -3,10 +3,10 @@ from rest_framework import generics, status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .subcategory_serializer import SubCategorySerializer, SubCategoryViewSerializer
-from ..models import SubCategory
+from ..models import Category
 
 class SubCategoryListCreateView(generics.ListCreateAPIView):
-    queryset = SubCategory.objects.all()
+    queryset = Category.objects.all()
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     
@@ -21,7 +21,7 @@ class SubCategoryListCreateView(generics.ListCreateAPIView):
 
     
 class subcategoryDetailview(generics.RetrieveUpdateAPIView):
-    queryset = SubCategory.objects.all()
+    queryset = Category.objects.all()
     authentication_classes = [JWTAuthentication]
     permission_classes = {IsAuthenticated}
     lookup_field = 'id'

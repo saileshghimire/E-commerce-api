@@ -1,10 +1,10 @@
-from product.models import Category, SubCategory
+from product.models import Category
 from rest_framework import serializers
 
 class SubCategoryViewSerializer(serializers.ModelSerializer):
     category = serializers.SerializerMethodField()
     class Meta:
-        model = SubCategory
+        model = Category
         fields = ['id', 'name', 'category', 'description']
 
     def get_category(self, obj):
@@ -16,5 +16,5 @@ class SubCategoryViewSerializer(serializers.ModelSerializer):
 class SubCategorySerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
     class Meta:
-        model = SubCategory
+        model = Category
         fields = ['id','name','category', 'description']
