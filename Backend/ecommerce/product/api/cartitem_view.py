@@ -20,3 +20,7 @@ class CartItemDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return CartItemListSerializer
+        return CartItemDetailSerializer
