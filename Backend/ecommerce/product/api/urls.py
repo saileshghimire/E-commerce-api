@@ -4,6 +4,7 @@ from .product_view import ProductListView, ProductDetailView
 from product.api.views import Commentlist, CommentEdit
 from .review_view import ReviewListAPIView, ReviewDetailAPIView
 from .cartitem_view import CartItemListAPIView, CartItemDetailAPIView
+from .cart_view import CartListAPIView
 
 urlpatterns = [
     path("category/", CategoryAPIView.as_view(), name="category-list"),
@@ -19,4 +20,6 @@ urlpatterns = [
 
     path('cartitem/', CartItemListAPIView.as_view(), name="cartitem-list"),
     path('cartitem/<int:id>/', CartItemDetailAPIView.as_view(), name="cartitem-detail"),
+
+    path('cart/', CartListAPIView.as_view(), name="cart-list"),
 ]

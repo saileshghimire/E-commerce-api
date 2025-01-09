@@ -1,4 +1,4 @@
-from ..models import CartItem, Product
+from ..models import CartItem, Product, Cart
 from user_app.models import CustomUser
 from rest_framework import serializers
 
@@ -23,6 +23,7 @@ class CartItemDetailSerializer(serializers.ModelSerializer):
         fields = ['id','product','quantity']
 
     def create(self, validated_data):
-        validated_data['user'] = self.context['request'].user
+        cart = Cart.objects.get_or_create(user=self.context['request'].user)
+        validated_data['cart'] = cart
         return super().create(validated_data)
 
